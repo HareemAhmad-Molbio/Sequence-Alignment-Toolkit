@@ -33,3 +33,20 @@ def initialize_matrix(rows, cols, gap_penalty):
         matrix[0][j] = j * gap_penalty
 
     return matrix
+
+
+def calculate_score(
+    diagonal,
+    up,
+    left,
+):
+    """
+    Return the maximum of the three possible scores.
+    """
+
+    return max(
+        diagonal,
+        up,
+        left,
+    )
+
