@@ -1,12 +1,15 @@
 # 🧬 Sequence Alignment Toolkit
 
+# 🧬 Sequence Alignment Toolkit
+
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
-
 ![License](https://img.shields.io/badge/License-MIT-green)
+![Bioinformatics](https://img.shields.io/badge/Bioinformatics-Sequence%20Alignment-success)
+![Status](https://img.shields.io/badge/Status-v1.0-brightgreen)
 
-![Status](https://img.shields.io/badge/Status-Active-success)
+A Python-based bioinformatics toolkit implementing the **Needleman–Wunsch global sequence alignment algorithm** from scratch using dynamic programming.
 
-A Python-based bioinformatics toolkit that implements the **Needleman–Wunsch global sequence alignment algorithm** from scratch. The toolkit aligns DNA sequences provided either directly from the command line or through FASTA files and generates detailed alignment statistics.
+The toolkit supports direct DNA sequence input, FASTA files, publication-quality visualizations, and alignment statistics. It is designed as an educational and practical implementation of one of the fundamental algorithms in computational biology.
 
 ---
 
@@ -14,43 +17,48 @@ A Python-based bioinformatics toolkit that implements the **Needleman–Wunsch g
 
 - ✅ Needleman–Wunsch Global Sequence Alignment
 - ✅ Dynamic Programming Score Matrix
-- ✅ Matrix Initialization
-- ✅ Matrix Filling Algorithm
-- ✅ Traceback Algorithm
-- ✅ Optimal Alignment Reconstruction
-- ✅ Alignment Statistics
-  - Matches
-  - Mismatches
-  - Gaps
-  - Sequence Identity (%)
-- ✅ Command-Line Interface (CLI)
-- ✅ DNA Sequence Validation
+- ✅ Traceback Path Reconstruction
 - ✅ FASTA File Support
-- ✅ Modular Python Architecture
+- ✅ DNA Sequence Validation
+- ✅ Alignment Statistics
+- ✅ Publication-quality Visualizations
+- ✅ PNG and SVG Figure Export
+- ✅ Command Line Interface (CLI)
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```
+```text
 Sequence-Alignment-Toolkit/
+
+├── align.py
+├── algorithms.py
+├── formatter.py
+├── io_utils.py
+├── scoring.py
+├── visualization.py
+├── requirements.txt
+├── README.md
+├── LICENSE
 │
-├── align.py                # Main command-line application
-├── algorithms.py           # Needleman-Wunsch algorithm
-├── formatter.py            # Alignment formatting & statistics
-├── io_utils.py             # FASTA file handling
-├── scoring.py              # Scoring configuration
 ├── sample_data/
 │   ├── human.fasta
 │   └── mouse.fasta
-├── requirements.txt
-├── LICENSE
-└── README.md
+│
+├── output/
+│
+├── screenshots/
+│   ├── traceback_overlay.png
+│   ├── alignment_visualization.png
+│   └── alignment_statistics.png
+│
+└── tests/
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
 Clone the repository
 
@@ -66,7 +74,7 @@ Create a virtual environment
 python3 -m venv venv
 ```
 
-Activate the virtual environment
+Activate it
 
 ### macOS / Linux
 
@@ -88,31 +96,17 @@ pip install -r requirements.txt
 
 ---
 
-## 📦 Requirements
-
-- Python 3.10+
-- NumPy
-- Biopython
-
-Install manually
-
-```bash
-pip install numpy biopython
-```
-
----
-
 # 🚀 Usage
 
 ## Align two DNA sequences
 
 ```bash
-python align.py ACT AT
+python align.py ACTGACTGA ACTTACTGA
 ```
 
 ---
 
-## Align two FASTA files
+## Align FASTA sequences
 
 ```bash
 python align.py sample_data/human.fasta sample_data/mouse.fasta
@@ -120,80 +114,57 @@ python align.py sample_data/human.fasta sample_data/mouse.fasta
 
 ---
 
-## Example Output
+# 📊 Workflow
+
+The toolkit performs the following steps:
 
 ```text
-Sequence Alignment Toolkit
-======================================
-
-Sequence 1 : ACTGACTGA
-Sequence 2 : ACTTACTGA
-
-Completed Score Matrix
-
-[[  0  -2  -4  -6  -8 -10 -12 -14 -16 -18]
- [ -2   1  -1  -3  -5  -7  -9 -11 -13 -15]
- [ -4  -1   2   0  -2  -4  -6  -8 -10 -12]
- ...
-]
-
-Optimal Alignment
------------------
-
-ACTGACTGA
-|||.|||||
-ACTTACTGA
-
-Matches      : 8
-Mismatches   : 1
-Gaps         : 0
-Identity     : 88.89%
+Input Sequences
+        │
+        ▼
+Initialize Dynamic Programming Matrix
+        │
+        ▼
+Fill Score Matrix
+        │
+        ▼
+Traceback Reconstruction
+        │
+        ▼
+Generate Optimal Alignment
+        │
+        ▼
+Compute Alignment Statistics
+        │
+        ▼
+Generate Publication-quality Figures
 ```
 
 ---
 
-# 🧬 Needleman–Wunsch Algorithm
+# 📈 Visualization
 
-The toolkit implements the classical **Needleman–Wunsch dynamic programming algorithm** for global sequence alignment.
+## Dynamic Programming Matrix with Traceback
 
-### Workflow
+The toolkit generates a heatmap of the Needleman–Wunsch score matrix and overlays the optimal traceback path.
 
-1. Initialize scoring matrix
-2. Apply gap penalties
-3. Fill matrix using dynamic programming
-4. Perform traceback
-5. Reconstruct optimal alignment
-6. Calculate alignment statistics
+![Traceback Overlay](screenshots/traceback_overlay.png)
 
 ---
 
-# 📊 Alignment Statistics
+## Optimal Sequence Alignment
 
-The toolkit automatically reports
+Publication-style visualization of the final global alignment.
 
-- Number of Matches
-- Number of Mismatches
-- Number of Gaps
-- Percentage Sequence Identity
+![Alignment Visualization](screenshots/alignment_visualization.png)
 
 ---
 
-# 📁 Sample Data
+## Alignment Statistics
 
-Example FASTA files are provided in
+Summary of matches, mismatches, gaps and percentage identity.
 
-```
-sample_data/
-```
-
-Example
-
-```
-human.fasta
-mouse.fasta
-```
-
-These can be used immediately after cloning the repository.
+![Alignment Statistics](screenshots/alignment_statistics.png)
 
 ---
 
@@ -215,63 +186,98 @@ These can be used immediately after cloning the repository.
 
 ![Validation](screenshots/invalid_sequence.png)
 
-# 🛠️ Current Capabilities
+# 📋 Example Output
 
-| Feature | Status |
-|----------|--------|
-| Global Alignment | ✅ |
-| Needleman–Wunsch | ✅ |
-| Dynamic Programming | ✅ |
-| Traceback | ✅ |
-| FASTA Support | ✅ |
-| Command-Line Interface | ✅ |
-| Alignment Statistics | ✅ |
-| DNA Validation | ✅ |
+```text
+Sequence Alignment Toolkit
 
----
+Sequence 1 : ACTGACTGA
+Sequence 2 : ACTTACTGA
 
-# 🚧 Planned Features
+Optimal Alignment
 
-The following features are currently under development.
+ACTGACTGA
+|||.|||||
+ACTTACTGA
 
-- 📊 Score Matrix Heatmap
-- 🎨 Traceback Path Visualization
-- 📈 Alignment Statistics Charts
-- 🧬 Smith–Waterman Local Alignment
-- 🧪 Protein Sequence Alignment
-- 🧬 BLOSUM62 Scoring Matrix
-- 📄 HTML Alignment Reports
-- 📑 PDF Export
-- 🧪 Unit Testing
-- ⚡ GitHub Actions CI/CD
+Matches     : 8
+Mismatches  : 1
+Gaps        : 0
+Identity    : 88.89%
+```
 
 ---
 
-# 📚 Technologies Used
+# 📄 Generated Output
 
-- Python
+The toolkit automatically exports publication-quality figures.
+
+```text
+output/
+
+score_matrix_heatmap.png
+score_matrix_heatmap.svg
+
+alignment_visualization.png
+alignment_visualization.svg
+
+alignment_statistics.png
+alignment_statistics.svg
+```
+
+---
+
+# 🧬 Algorithm
+
+This project implements the classical **Needleman–Wunsch Global Alignment Algorithm**.
+
+The implementation consists of:
+
+- Matrix Initialization
+- Dynamic Programming Matrix Filling
+- Traceback Reconstruction
+- Optimal Global Alignment
+- Alignment Statistics
+- Visualization Module
+
+---
+
+# 🛠 Technologies
+
+- Python 3
 - NumPy
-- Biopython
 - Matplotlib
-- Dynamic Programming
-- Sequence Alignment Algorithms
-- Command-Line Interface (CLI)
 
 ---
 
-# 🤝 Contributing
+# 🎯 Future Improvements
 
-Contributions, feature requests, and bug reports are welcome.
-
-Feel free to fork the repository and submit a pull request.
+- Smith–Waterman Local Alignment
+- Affine Gap Penalties
+- Protein Sequence Alignment
+- Custom Scoring Matrices (BLOSUM/PAM)
+- Multiple Sequence Alignment
+- Interactive Visualization
+- GUI Version
+- Performance Optimization
 
 ---
 
-# 📄 License
+# 📚 References
+
+Needleman SB, Wunsch CD.
+
+*A general method applicable to the search for similarities in the amino acid sequence of two proteins.*
+
+Journal of Molecular Biology (1970)
+
+https://doi.org/10.1016/0022-2836(70)90057-4
+
+---
+
+# 📜 License
 
 This project is licensed under the MIT License.
-
-See the **LICENSE** file for details.
 
 ---
 
@@ -279,10 +285,10 @@ See the **LICENSE** file for details.
 
 **Hareem Ahmad**
 
-Molecular Biology & Biochemistry Graduate
+M.Sc. Molecular Biology & Biochemistry
 
-Bioinformatics | Computational Biology | Python | Sequence Analysis | Genomics
+Bioinformatics | Computational Biology | AI for Life Sciences
 
-GitHub
+GitHub:
 
 https://github.com/HareemAhmad-Molbio
