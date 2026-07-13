@@ -50,3 +50,38 @@ def calculate_score(
         left,
     )
 
+def fill_matrix(
+    matrix,
+    seq1,
+    seq2,
+    match_score,
+    mismatch_score,
+    gap_penalty,
+):
+    """
+    Fill the Needleman-Wunsch score matrix.
+    """
+
+    rows = len(seq1) + 1
+    cols = len(seq2) + 1
+
+    for i in range(1, rows):
+
+        for j in range(1, cols):
+
+            if seq1[i - 1] == seq2[j - 1]:
+                score = match_score
+            else:
+                score = mismatch_score
+
+            diagonal = matrix[i - 1][j - 1] + score
+            up = matrix[i - 1][j] + gap_penalty
+            left = matrix[i][j - 1] + gap_penalty
+
+            matrix[i][j] = calculate_score(
+                diagonal,
+                up,
+                left,
+            )
+
+    return matrix

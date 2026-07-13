@@ -1,6 +1,7 @@
 from algorithms import (
     initialize_matrix,
     calculate_score,
+    fill_matrix,
 )
 
 from scoring import (
@@ -22,27 +23,18 @@ def main():
         GAP_PENALTY,
     )
 
-    diagonal = matrix[0][0] + MATCH_SCORE
-
-    up = matrix[0][1] + GAP_PENALTY
-
-    left = matrix[1][0] + GAP_PENALTY
-
-    score = calculate_score(
-        diagonal,
-        up,
-        left,
+    matrix = fill_matrix(
+        matrix,
+        seq1,
+        seq2,
+        MATCH_SCORE,
+        MISMATCH_SCORE,
+        GAP_PENALTY,
     )
-    print("Initialized Matrix\n")
+    
+    print("Completed Score Matrix\n")
     print(matrix)
 
-    print("\nPossible Scores")
-    print("----------------")
-    print("Diagonal :", diagonal)
-    print("Up       :", up)
-    print("Left     :", left)
-
-    print("\nSelected Score :", score)
-
+    
 if __name__ == "__main__":
     main()
