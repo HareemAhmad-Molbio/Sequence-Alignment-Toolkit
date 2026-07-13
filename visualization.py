@@ -8,6 +8,7 @@ def plot_score_matrix(
     seq1,
     seq2,
     output_file,
+    traceback_path,
 ):
     """
     Plot the Needleman-Wunsch score matrix as a heatmap.
@@ -118,6 +119,23 @@ def plot_score_matrix(
                 fontweight="bold",
                 color=color,
             )
+
+    if traceback_path:
+
+        rows = [p[0] for p in traceback_path]
+        cols = [p[1] for p in traceback_path]
+
+        ax.plot(
+            cols,
+            rows,
+            color="red",
+            linewidth=3,
+            marker="o",
+            markersize=6,
+            markerfacecolor="red",
+            markeredgecolor="white",
+            zorder=10,
+        )
 
     plt.tight_layout()
 

@@ -102,10 +102,14 @@ def traceback(
     aligned_seq1 = []
     aligned_seq2 = []
 
+    traceback_path = []
+
     i = len(seq1)
     j = len(seq2)
 
     while i > 0 and j > 0:
+
+        traceback_path.append((i, j))
 
         if seq1[i - 1] == seq2[j - 1]:
             score = match_score
@@ -140,22 +144,15 @@ def traceback(
 
             j -= 1
 
-    while i > 0:
-
-        aligned_seq1.append(seq1[i - 1])
-        aligned_seq2.append("-")
-        i -= 1
-
-    while j > 0:
-
-        aligned_seq1.append("-")
-        aligned_seq2.append(seq2[j - 1])
-        j -= 1
-
     aligned_seq1.reverse()
     aligned_seq2.reverse()
+
+    traceback_path.append((0, 0))
+    traceback_path.reverse()
 
     return (
         "".join(aligned_seq1),
         "".join(aligned_seq2),
+        traceback_path,
     )
+    

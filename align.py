@@ -83,7 +83,7 @@ def main():
         GAP_PENALTY,
     )
 
-    aligned_seq1, aligned_seq2 = traceback(
+    aligned_seq1, aligned_seq2,traceback_path = traceback(
         matrix,
         seq1,
         seq2,
@@ -100,6 +100,9 @@ def main():
     print("Completed Score Matrix\n")
     print(matrix)
 
+    print("\nTraceback Path")
+    print("----------------")
+    print(traceback_path)
 
     print("\nOptimal Alignment")
     print("-----------------")
@@ -120,6 +123,7 @@ def main():
         seq1,
         seq2,
         "output/score_matrix_heatmap.png",
+        traceback_path,
     )
 
     print("\nScore matrix heatmap saved to output/score_matrix_heatmap.png")
