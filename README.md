@@ -191,23 +191,23 @@ These can be used immediately after cloning the repository.
 
 ---
 
-# 🖼️ Screenshots
+## Screenshots
 
-## Global Sequence Alignment
+### Global Sequence Alignment
 
-```
-screenshots/alignment_output.png
-```
-
-## Dynamic Programming Score Matrix
-
-```
-screenshots/score_matrix.png
-```
-
-*(Screenshots will be added as the visualization module is completed.)*
+![Global Alignment](screenshots/cli_alignment.png)
 
 ---
+
+### FASTA File Alignment
+
+![FASTA Alignment](screenshots/fasta_alignment.png)
+
+---
+
+### Invalid DNA Validation
+
+![Validation](screenshots/invalid_sequence.png)
 
 # 🛠️ Current Capabilities
 
@@ -246,6 +246,7 @@ The following features are currently under development.
 - Python
 - NumPy
 - Biopython
+- Matplotlib
 - Dynamic Programming
 - Sequence Alignment Algorithms
 - Command-Line Interface (CLI)
