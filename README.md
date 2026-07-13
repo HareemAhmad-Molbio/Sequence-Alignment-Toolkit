@@ -1,6 +1,5 @@
 # 🧬 Sequence Alignment Toolkit
 
-# 🧬 Sequence Alignment Toolkit
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -148,7 +147,7 @@ Generate Publication-quality Figures
 
 The toolkit generates a heatmap of the Needleman–Wunsch score matrix and overlays the optimal traceback path.
 
-![Traceback Overlay](screenshots/traceback_overlay.png)
+![score_matrix_heatmap](screenshots/score_matrix_heatmap.png)
 
 ---
 
