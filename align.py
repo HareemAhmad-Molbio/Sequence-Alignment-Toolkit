@@ -13,7 +13,11 @@ from io_utils import (
 
 from formatter import format_alignment
 
-from visualization import plot_score_matrix
+from visualization import (
+    plot_score_matrix,
+    plot_alignment,
+    plot_alignment_statistics,
+)
 
 from scoring import (
     MATCH_SCORE,
@@ -128,6 +132,27 @@ def main():
 
     print("\nScore matrix heatmap saved to output/score_matrix_heatmap.png")
  
+    plot_alignment(
+        aligned_seq1,
+        aligned_seq2,
+        alignment['matches'],
+        alignment['mismatches'],
+        alignment['gaps'],
+        alignment['identity'],
+        "output/alignment_visualization.png",
+    )
+
+    print("Alignment visualization saved to output/alignment_visualization.png")
+
+    plot_alignment_statistics(
+        alignment["matches"],
+        alignment["mismatches"],
+        alignment["gaps"],
+        alignment["identity"],
+        "output/alignment_statistics.png",
+    )
+
+    print("Alignment statistics saved to output/alignment_statistics.png")
 
 if __name__ == "__main__":
     main()

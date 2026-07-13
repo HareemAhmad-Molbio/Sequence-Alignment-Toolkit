@@ -159,3 +159,256 @@ def plot_score_matrix(
     )
 
     plt.close()
+
+
+def plot_alignment(
+    aligned_seq1,
+    aligned_seq2,
+    matches,
+    mismatches,
+    gaps,
+    identity,
+    output_file,
+):
+    """
+    Create a publication-style alignment figure.
+    """
+
+    from pathlib import Path
+
+    fig, ax = plt.subplots(figsize=(14, 4))
+
+    ax.set_xlim(0, len(aligned_seq1) + 8)
+    ax.set_ylim(-1, 5)
+
+    ax.axis("off")
+
+    ax.set_title(
+        "Optimal Global Alignment",
+        fontsize=18,
+        fontweight="bold",
+        pad=20,
+    )
+
+    ax.text(
+        0,
+        3,
+        "Sequence 1 :",
+        fontsize=13,
+        fontweight="bold",
+        family="monospace",
+    )
+
+    ax.text(
+        0,
+        1,
+        "Sequence 2 :",
+        fontsize=13,
+        fontweight="bold",
+        family="monospace",
+    )
+
+    start_x = 5
+
+    for i, (b1, b2) in enumerate(zip(aligned_seq1, aligned_seq2)):
+
+        x = start_x + i
+
+        if b1 == b2:
+
+            color = "forestgreen"
+            symbol = "|"
+
+        elif b1 == "-" or b2 == "-":
+
+            color = "red"
+            symbol = " "
+
+        else:
+
+            color = "darkorange"
+            symbol = "."
+
+        ax.text(
+            x,
+            3,
+            b1,
+            color=color,
+            fontsize=16,
+            family="monospace",
+            fontweight="bold",
+        )
+
+        ax.text(
+            x,
+            2,
+            symbol,
+            color=color,
+            fontsize=16,
+            family="monospace",
+            fontweight="bold",
+        )
+
+        ax.text(
+            x,
+            1,
+            b2,
+            color=color,
+            fontsize=16,
+            family="monospace",
+            fontweight="bold",
+        )
+
+    ax.text(
+        0,
+        -0.2,
+        f"Identity : {identity:.2f}%",
+        fontsize=12,
+        family="monospace",
+    )
+
+    ax.text(
+        0,
+        -0.7,
+        f"Matches : {matches}",
+        fontsize=12,
+        family="monospace",
+    )
+
+    ax.text(
+        6,
+        -0.7,
+        f"Mismatches : {mismatches}",
+        fontsize=12,
+        family="monospace",
+    )
+
+    ax.text(
+        15,
+        -0.7,
+        f"Gaps : {gaps}",
+        fontsize=12,
+        family="monospace",
+    )
+
+    output_path = Path(output_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    plt.savefig(
+        output_path,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    plt.savefig(
+        output_path.with_suffix(".svg"),
+        bbox_inches="tight",
+    )
+
+    plt.close()
+
+
+def plot_alignment_statistics(
+    matches,
+    mismatches,
+    gaps,
+    identity,
+    output_file,
+):
+    """
+    Create a summary chart for alignment statistics.
+    """
+
+    from pathlib import Path
+
+    labels = [
+        "Matches",
+        "Mismatches",
+        "Gaps",
+    ]
+
+    values = [
+        matches,
+        mismatches,
+        gaps,
+    ]
+
+    fig, ax = plt.subplots(figsize=(7, 5))
+
+    bars = ax.bar(
+        labels,
+        values,
+        color=[
+            "forestgreen",
+            "darkorange",
+            "firebrick",
+        ],
+    )
+
+    ax.set_title(
+        "Alignment Statistics",
+        fontsize=18,
+        fontweight="bold",
+        pad=15,
+    )
+
+    ax.set_ylabel(
+        "Count",
+        fontsize=12,
+        fontweight="bold",
+    )
+
+    ax.set_ylim(
+        0,
+        max(values) + 2,
+    )
+
+    for bar in bars:
+
+        height = bar.get_height()
+
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            height + 0.1,
+            str(int(height)),
+            ha="center",
+            fontsize=11,
+            fontweight="bold",
+        )
+
+    ax.text(
+        0.98,
+        0.95,
+        f"Identity: {identity:.2f}%",
+        transform=ax.transAxes,
+        ha="right",
+        va="top",
+        fontsize=12,
+        fontweight="bold",
+        bbox=dict(
+            boxstyle="round",
+            facecolor="white",
+            edgecolor="gray",
+        ),
+    )
+
+    plt.tight_layout()
+
+    output_path = Path(output_file)
+    output_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    plt.savefig(
+        output_path,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    plt.savefig(
+        output_path.with_suffix(".svg"),
+        bbox_inches="tight",
+    )
+
+    plt.close()
