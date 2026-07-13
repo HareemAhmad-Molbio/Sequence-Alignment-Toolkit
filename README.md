@@ -1,5 +1,11 @@
 # 🧬 Sequence Alignment Toolkit
 
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+
+![License](https://img.shields.io/badge/License-MIT-green)
+
+![Status](https://img.shields.io/badge/Status-Active-success)
+
 A Python-based bioinformatics toolkit that implements the **Needleman–Wunsch global sequence alignment algorithm** from scratch. The toolkit aligns DNA sequences provided either directly from the command line or through FASTA files and generates detailed alignment statistics.
 
 ---

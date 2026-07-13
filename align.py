@@ -13,6 +13,8 @@ from io_utils import (
 
 from formatter import format_alignment
 
+from visualization import plot_score_matrix
+
 from scoring import (
     MATCH_SCORE,
     MISMATCH_SCORE,
@@ -113,6 +115,15 @@ def main():
     print(f"Gaps        : {alignment['gaps']}")
     print(f"Identity    : {alignment['identity']:.2f}%")
 
+    plot_score_matrix(
+        matrix,
+        seq1,
+        seq2,
+        "output/score_matrix_heatmap.png",
+    )
+
+    print("\nScore matrix heatmap saved to output/score_matrix_heatmap.png")
+ 
 
 if __name__ == "__main__":
     main()
